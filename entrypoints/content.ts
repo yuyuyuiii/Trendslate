@@ -1,5 +1,6 @@
 import { extractDescriptions } from '../utils/dom'
 import { translateText } from '../utils/translator'
+import { getCachedTranslation, setCachedTranslation } from '../utils/cache'
 
 function applyTranslation(element: HTMLElement, original: string, translated: string) {
   element.setAttribute('data-trendslate-original', original)
@@ -11,16 +12,30 @@ async function translateAndReplace() {
   const descriptions = extractDescriptions()
   if (descriptions.length === 0) return
 
+  const toTranslate: { repo: string; element: HTMLElement; text: string }[] = []
+
+  for (const desc of descriptions) {
+    const cached = await getCachedTranslation(desc.repo)
+    if (cached && cached.original === desc.text) {
+      applyTranslation(desc.element, desc.text, cached.translated)
+    } else {
+      toTranslate.push({ repo: desc.repo, element: desc.element, text: desc.text })
+    }
+  }
+
+  if (toTranslate.length === 0) return
+
   const results = await Promise.allSettled(
-    descriptions.map(d => translateText(d.text))
+    toTranslate.map(d => translateText(d.text))
   )
 
-  for (let i = 0; i < descriptions.length; i++) {
-    const desc = descriptions[i]
+  for (let i = 0; i < toTranslate.length; i++) {
+    const { repo, element, text } = toTranslate[i]
     const result = results[i]
 
     if (result.status === 'fulfilled' && result.value) {
-      applyTranslation(desc.element, desc.text, result.value)
+      applyTranslation(element, text, result.value)
+      await setCachedTranslation(repo, text, result.value)
     }
   }
 }

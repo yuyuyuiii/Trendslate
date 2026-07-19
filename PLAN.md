@@ -40,14 +40,14 @@
 
 ### Phase 4: 替换 & 显示
 
-- [ ] **4.1 实现文本替换** - 将元素的 `textContent` 替换为翻译后的中文 - 在元素上设置 `data-trendslate-original` 属性保存原文 - 在元素上设置 `data-trendslate-translated` 标记
-- [ ] **4.2 原始数据保存** - 翻译前将原文存入 `data-trendslate-original` 属性 - 供 toggle 切换时恢复原文使用
+- [x] **4.1 实现文本替换** - 将元素的 `textContent` 替换为翻译后的中文 - 在元素上设置 `data-trendslate-original` 属性保存原文 - 在元素上设置 `data-trendslate-translated` 标记
+- [x] **4.2 原始数据保存** - 翻译前将原文存入 `data-trendslate-original` 属性 - 供 toggle 切换时恢复原文使用
 
 ### Phase 5: 缓存层
 
-- [ ] **5.1 实现缓存读写** - `getCachedTranslation(repo: string): Translation | null` - `setCachedTranslation(repo: string, original: string, translated: string): void` - 使用 `chrome.storage.local`
-- [ ] **5.2 缓存命中判断** - 以 `cache:{repo}` 为 key 存储 - 命中条件: key 存在且 `original` 字段与当前原文一致（仓库内容变更时重新翻译）- 未命中则调用翻译 API
-- [ ] **5.3 清空缓存** - `clearAllCache(): Promise<void>` - 遍历 `chrome.storage.local` 删除所有 `cache:` 前缀的 key - 暴露函数供 Popup 调用
+- [x] **5.1 实现缓存读写** - `getCachedTranslation(repo: string): Translation | null` - `setCachedTranslation(repo: string, original: string, translated: string): void` - 使用 `chrome.storage.local`
+- [x] **5.2 缓存命中判断** - 以 `cache:{repo}` 为 key 存储 - 命中条件: key 存在且 `original` 字段与当前原文一致（仓库内容变更时重新翻译）- 未命中则调用翻译 API
+- [x] **5.3 清空缓存** - `clearAllCache(): Promise<void>` - 遍历 `chrome.storage.local` 删除所有 `cache:` 前缀的 key - 暴露函数供 Popup 调用
 
 ### Phase 6: Popup & Toggle
 
