@@ -27,16 +27,16 @@
 
 ### Phase 2: 读取描述
 
-- [ ] **2.1 实现描述提取函数** - 通过 `document.querySelectorAll('article.Box-row p')` 遍历 - 过滤出包含 `.col-9.color-fg-muted.my-1` 类的元素 - 提取文本内容
-- [ ] **2.2 实现 repo 名称提取** - 从同一个 `article.Box-row` 内的 `h2 a` 元素提取 `owner/repo` - 用于后续缓存的 key
-- [ ] **2.3 组合数据结构** - 输出 `Array<{ repo: string, element: HTMLElement, text: string }>` - 验证: 控制台输出提取到的描述列表
-- [ ] **2.4 边界处理** - 跳过已有翻译标记的元素 - 跳过无描述内容的仓库（description 元素存在但为空）- 页面使用 Turbo（GitHub 使用 Turbo Drive），监听 `turbo:load` 事件而非 `DOMContentLoaded`
+- [x] **2.1 实现描述提取函数** - 通过 `document.querySelectorAll('article.Box-row p')` 遍历 - 过滤出包含 `.col-9.color-fg-muted.my-1` 类的元素 - 提取文本内容
+- [x] **2.2 实现 repo 名称提取** - 从同一个 `article.Box-row` 内的 `h2 a` 元素提取 `owner/repo` - 用于后续缓存的 key
+- [x] **2.3 组合数据结构** - 输出 `Array<{ repo: string, element: HTMLElement, text: string }>` - 验证: 控制台输出提取到的描述列表
+- [x] **2.4 边界处理** - 跳过已有翻译标记的元素 - 跳过无描述内容的仓库（description 元素存在但为空）- 页面使用 Turbo（GitHub 使用 Turbo Drive），监听 `turbo:load` 事件而非 `DOMContentLoaded`
 
 ### Phase 3: DeepL 翻译集成
 
-- [ ] **3.1 封装翻译 API 调用** - 函数 `translateText(text: string): Promise<string>` - POST `https://api-free.deepl.com/v2/translate` - Header: `Authorization: DeepL-Auth-Key ${key}` - Body: `{ text: [text], target_lang: "ZH", source_lang: "EN" }` - 解析响应，返回翻译文本
-- [ ] **3.2 批量翻译逻辑** - 收集未缓存的描述文本数组 - 逐个并行调用 `translateText`（`Promise.all`）- 处理单个失败（不中断整体流程，失败项跳过）
-- [ ] **3.3 错误处理** - 网络错误 / 4xx / 5xx → 静默失败，保留原文 - console.warn 记录错误（仅开发期可见）- 不展示错误 UI
+- [x] **3.1 封装翻译 API 调用** - 函数 `translateText(text: string): Promise<string>` - POST `https://api-free.deepl.com/v2/translate` - Header: `Authorization: DeepL-Auth-Key ${key}` - Body: `{ text: [text], target_lang: "ZH", source_lang: "EN" }` - 解析响应，返回翻译文本
+- [x] **3.2 批量翻译逻辑** - 收集未缓存的描述文本数组 - 逐个并行调用 `translateText`（`Promise.all`）- 处理单个失败（不中断整体流程，失败项跳过）
+- [x] **3.3 错误处理** - 网络错误 / 4xx / 5xx → 静默失败，保留原文 - console.warn 记录错误（仅开发期可见）- 不展示错误 UI
 
 ### Phase 4: 替换 & 显示
 
