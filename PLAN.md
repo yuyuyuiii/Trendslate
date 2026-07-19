@@ -51,11 +51,11 @@
 
 ### Phase 6: Popup & Toggle
 
-- [ ] **6.1 创建 Popup HTML** - WXT 默认 `entrypoints/popup/` 目录 - 简单 React 组件: toggle 开关 + 清空缓存按钮
-- [ ] **6.2 Toggle 状态管理** - 状态值存入 `chrome.storage.local` key: `showOriginal` - 默认 `false`（显示译文）
-- [ ] **6.3 Toggle 与 Content Script 通信** - Content Script 监听 `chrome.storage.onChanged` - 当 `showOriginal` 变化时: - `true` → 遍历所有标记过 `data-trendslate-translated` 的元素，恢复 `data-trendslate-original` 原文 - `false` → 恢复为翻译文本
-- [ ] **6.4 Popup 清空缓存按钮** - 调用 `clearAllCache()` - 显示"已清除"反馈（简单文字变化）
-- [ ] **6.5 Popup 样式** - 简洁 UI，宽度 200px - 标题: "Trendslate" - Toggle 开关: "显示原文" / "显示译文" - 按钮: "清空翻译缓存"
+- [x] **6.1 创建 Popup HTML** - WXT 默认 `entrypoints/popup/` 目录 - 简单 React 组件: toggle 开关 + 清空缓存按钮
+- [x] **6.2 Toggle 状态管理** - 状态值存入 `chrome.storage.local` key: `showOriginal` - 默认 `false`（显示译文）
+- [x] **6.3 Toggle 与 Content Script 通信** - Content Script 监听 `chrome.storage.onChanged` - 当 `showOriginal` 变化时: - `true` → 遍历所有标记过 `data-trendslate-translated` 的元素，恢复 `data-trendslate-original` 原文 - `false` → 恢复为翻译文本
+- [x] **6.4 Popup 清空缓存按钮** - 调用 `clearAllCache()` - 显示"已清除"反馈（简单文字变化）
+- [x] **6.5 Popup 样式** - 简洁 UI，宽度 200px - 标题: "Trendslate" - Toggle 开关: "显示原文" / "显示译文" - 按钮: "清空翻译缓存"
 
 ### Phase 7: 联调 & 验证
 

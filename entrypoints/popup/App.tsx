@@ -1,35 +1,53 @@
-import { useState } from 'react';
-import reactLogo from '@/assets/react.svg';
-import wxtLogo from '/wxt.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import { clearAllCache } from '../../utils/cache'
+import './App.css'
+
+const STORAGE_KEY = 'showOriginal'
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [showOriginal, setShowOriginal] = useState(false)
+  const [cacheCleared, setCacheCleared] = useState(false)
+
+  useEffect(() => {
+    browser.storage.local.get(STORAGE_KEY).then((result) => {
+      if (result[STORAGE_KEY] !== undefined) {
+        setShowOriginal(result[STORAGE_KEY] as boolean)
+      }
+    })
+  }, [])
+
+  function handleToggle() {
+    const newValue = !showOriginal
+    setShowOriginal(newValue)
+    browser.storage.local.set({ [STORAGE_KEY]: newValue })
+  }
+
+  async function handleClearCache() {
+    await clearAllCache()
+    setCacheCleared(true)
+    setTimeout(() => setCacheCleared(false), 2000)
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>WXT + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
-  );
+    <div className="popup">
+      <h1 className="title">Trendslate</h1>
+
+      <label className="toggle-row">
+        <span className="toggle-label">
+          {showOriginal ? '显示原文' : '显示译文'}
+        </span>
+        <input
+          type="checkbox"
+          checked={showOriginal}
+          onChange={handleToggle}
+        />
+      </label>
+
+      <button className="clear-btn" onClick={handleClearCache}>
+        {cacheCleared ? '已清除 ✓' : '清空翻译缓存'}
+      </button>
+    </div>
+  )
 }
 
-export default App;
+export default App
