@@ -19,11 +19,11 @@
 
 ### Phase 1: 项目初始化
 
-- [ ] **1.1 确认环境** - 确认 Node.js ≥ 18 - 确认 Chrome 已安装
-- [ ] **1.2 用 WXT 初始化项目** - 执行 `npx wxt@latest init`，选择 TypeScript + React 模板 - 项目名 `trendslate` - 确认目录结构
-- [ ] **1.3 配置 manifest** - `manifest.json` 设置: - `name`: "Trendslate" - `permissions`: `["storage", "activeTab"]` - `host_permissions`: `["https://github.com/trending*", "https://api-free.deepl.com/*"]` - `content_scripts`: 匹配 `https://github.com/trending*`
-- [ ] **1.4 配置环境变量** - 创建 `.env` 文件，添加 `DEEPL_API_KEY=xxx` - 在 `wxt.config.ts` 中配置 `vite.env` 注入
-- [ ] **1.5 加载并验证** - `npm run dev` 启动 - Chrome 加载 `output/` 下的未打包扩展 - 打开 `github.com/trending` 确认 content script 注入成功（console.log）
+- [x] **1.1 确认环境** - 确认 Node.js ≥ 18 - 确认 Chrome 已安装
+- [x] **1.2 用 WXT 初始化项目** - 执行 `npx wxt@latest init`，选择 TypeScript + React 模板 - 项目名 `trendslate` - 确认目录结构
+- [x] **1.3 配置 manifest** - `manifest.json` 设置: - `name`: "Trendslate" - `permissions`: `["storage", "activeTab"]` - `host_permissions`: `["https://github.com/trending*", "https://api-free.deepl.com/*"]` - `content_scripts`: 匹配 `https://github.com/trending*`
+- [x] **1.4 配置环境变量** - 创建 `.env` 文件，添加 `DEEPL_API_KEY=xxx` - 在 `wxt.config.ts` 中配置 `vite.env` 注入
+- [x] **1.5 加载并验证** - `npm run dev` 启动 - Chrome 加载 `output/` 下的未打包扩展 - 打开 `github.com/trending` 确认 content script 注入成功（console.log）
 
 ### Phase 2: 读取描述
 
